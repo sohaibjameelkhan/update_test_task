@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:test_project/src/configs/utils/routes_utils.dart';
 import 'package:test_project/src/configs/utils/theme.dart';
 import 'package:test_project/src/modules/authenticationModule/providers/authentication_provider.dart';
+import 'package:test_project/src/modules/myProfileModule/providers/profile_provider.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context) => AuthenticationProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ProfileProvider(),
           ),
         ],
         child: ScreenUtilInit(

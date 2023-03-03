@@ -5,6 +5,7 @@ import 'package:test_project/src/modules/authenticationModule/screens/signup_scr
 import 'package:test_project/src/modules/myProfileModule/screens/dashboard_screen.dart';
 
 import '../../modules/authenticationModule/screens/splash_screen.dart';
+import '../../modules/myProfileModule/screens/managing_profile.dart';
 
 class RoutesUtils {
   //
@@ -59,6 +60,12 @@ var routerConfigs = GoRouter(
       path: DashBoardScreen.routeName,
       pageBuilder: (BuildContext context, GoRouterState state) {
         return const NoTransitionPage(child: DashBoardScreen());
+      },
+    ),
+    GoRoute(
+      path: ManageProfile.routeName,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        return const NoTransitionPage(child: ManageProfile());
       },
     ),
     // HomeAddressScreen/

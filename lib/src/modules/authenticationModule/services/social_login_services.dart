@@ -33,6 +33,10 @@ class SocialLoginService {
           boxName: LocalStorageTextUtils.currentRouteBox,
           key: LocalStorageTextUtils.currentRouteKey,
           value: SignInScreen.routeName);
+      await HiveLocalStorage.write(
+          boxName: LocalStorageTextUtils.userEmailBox,
+          key: LocalStorageTextUtils.userEmailKey,
+          value: userCredential.user!.email.toString());
 
       GoRouter.of(RoutesUtils.cNavigatorState.currentState!.context)
           .go(DashBoardScreen.routeName);

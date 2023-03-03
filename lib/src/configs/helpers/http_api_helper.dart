@@ -10,8 +10,8 @@ import 'exceptions_helper.dart';
 import 'hive_local_storage.dart';
 
 class HttpApiHelper {
-  String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoiZ2V0cGFpZC1hcHAiLCJpYXQiOjE2NzU5NzIxOTAsImV4cCI6MTY3NjA1ODU5MH0.tvLkNqF0UmWSrMqAC00X3Urpn3yFVTqXI-k7oKeTDKc";
+  //String token =
+  //    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoiZ2V0cGFpZC1hcHAiLCJpYXQiOjE2NzU5NzIxOTAsImV4cCI6MTY3NjA1ODU5MH0.tvLkNqF0UmWSrMqAC00X3Urpn3yFVTqXI-k7oKeTDKc";
 
   Future<Response?> get(
     String url,
@@ -26,7 +26,7 @@ class HttpApiHelper {
         Uri.parse(url),
         headers: {
           "Content-Type": "application/json",
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $userToken',
         },
       );
       dp(msg: "get response", arg: response.body.toString());
@@ -59,7 +59,7 @@ class HttpApiHelper {
           headers: {
             "x-api-channel": "getpaid-app",
             "Content-Type": "application/json",
-            'Authorization': 'Bearer $token',
+            'Authorization': 'Bearer $userToken',
           },
           body: jsonEncode(body));
       dp(msg: "get response", arg: response.body.toString());

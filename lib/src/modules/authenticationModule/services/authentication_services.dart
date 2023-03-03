@@ -58,6 +58,11 @@ class AuthenticationServices {
           value: SignInScreen.routeName);
 
       await HiveLocalStorage.write(
+          boxName: LocalStorageTextUtils.userEmailBox,
+          key: LocalStorageTextUtils.userEmailKey,
+          value: jsonResponse["user"]["email"]);
+
+      await HiveLocalStorage.write(
           boxName: LocalStorageTextUtils.userTokenBox,
           key: LocalStorageTextUtils.userTokenKey,
           value: jsonResponse["token"].toString());

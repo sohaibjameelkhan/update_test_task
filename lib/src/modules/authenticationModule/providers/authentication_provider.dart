@@ -106,6 +106,12 @@ class AuthenticationProvider extends ChangeNotifier {
     await HiveLocalStorage.deleteHiveValue(
         boxName: LocalStorageTextUtils.currentRouteBox,
         key: LocalStorageTextUtils.currentRouteKey);
+    await HiveLocalStorage.deleteHiveValue(
+        boxName: LocalStorageTextUtils.userEmailBox,
+        key: LocalStorageTextUtils.userEmailKey);
+    await HiveLocalStorage.deleteHiveValue(
+        boxName: LocalStorageTextUtils.userTokenBox,
+        key: LocalStorageTextUtils.userTokenKey);
     //await authServices.logoutUser();
     GoogleSignIn().signOut();
     // FacebookAuth.instance.logOut();
