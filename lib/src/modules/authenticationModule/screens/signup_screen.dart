@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/src/commonWidgets/custom_loader_widget.dart';
+import 'package:test_project/src/configs/helpers/validator_helpoers.dart';
 import 'package:test_project/src/modules/authenticationModule/screens/sign_in_screen.dart';
 
 import '../../../commonWidgets/button_widget.dart';
@@ -98,11 +99,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(
                     height: 15,
                   ),
-                  // SocialButtonWidget(
-                  //   text: FrontEndTextUtils.continueWithLinkedIn,
-                  //   icon: 'assets/images/linkdinicon.svg',
-                  //   onTap: () {},
-                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -111,46 +107,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Column(
                       children: [
                         TextFieldWidget(
-                          controller: emailController,
-                          textFieldHeight: 50,
-                          maxlines: 1,
-                          showSuffixIcon: false,
-                          toppadding: 18,
-                          hintText: FrontEndTextUtils.email,
-                          textInputType: TextInputType.emailAddress,
-                          validator: (String? value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return "Email is required";
-                            }
-                            String email = value ?? '';
-                            bool emailValid = RegExp(
-                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(email);
-
-                            if (!emailValid) {
-                              return 'Please use valid email address';
-                            }
-                            return null;
-                          },
-                        ),
+                            controller: emailController,
+                            textFieldHeight: 50,
+                            maxlines: 1,
+                            showSuffixIcon: false,
+                            toppadding: 18,
+                            hintText: FrontEndTextUtils.email,
+                            textInputType: TextInputType.emailAddress,
+                            validator: (String? value) {
+                              return ValidatorHelpers.validateEmail(value);
+                            }),
                         const SizedBox(
                           height: 5,
                         ),
                         TextFieldWidget(
-                          controller: nameController,
-                          textFieldHeight: 50,
-                          maxlines: 1,
-                          showSuffixIcon: false,
-                          toppadding: 18,
-                          hintText: FrontEndTextUtils.name,
-                          textInputType: TextInputType.name,
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return "Name is required";
-                            }
-                            return null;
-                          },
-                        ),
+                            controller: nameController,
+                            textFieldHeight: 50,
+                            maxlines: 1,
+                            showSuffixIcon: false,
+                            toppadding: 18,
+                            hintText: FrontEndTextUtils.name,
+                            textInputType: TextInputType.name,
+                            validator: (String? value) {
+                              return ValidatorHelpers.validateName(value);
+                            }),
                         const SizedBox(
                           height: 5,
                         ),
@@ -176,13 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   color: AppColors.appcolor,
                                 ),
                           validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter Password";
-                            } else if (!RegExp(
-                                    r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
-                                .hasMatch(value)) {
-                              return "Please Enter Strong Password";
-                            }
+                            return ValidatorHelpers.validatePassword(value);
                           },
                         ),
                         const SizedBox(
@@ -229,8 +203,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       radius: 12,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          authProvider.sendSignUpApiRequest(nameController.text,
-                              emailController.text, passwordController.text);
+                          authProvider.sendSignUpApiRequestProvider(
+                              nameController.text,
+                              emailController.text,
+                              passwordController.text);
                           // GoRouter.of(context).go(DashBoardScreen.routeName);
 
                           //toNext(context: context, widget: BackgroundCheckView());

@@ -2,9 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../configs/helpers/hive_local_storage.dart';
+import '../../../configs/utils/local_storage_text_utils.dart';
 import '../../../configs/utils/routes_utils.dart';
 import '../../../configs/utils/snackbar_utils.dart';
 import '../../myProfileModule/screens/dashboard_screen.dart';
+import '../screens/sign_in_screen.dart';
 
 class SocialLoginService {
   Future<UserCredential?> signInWithGoogle() async {
@@ -25,6 +28,11 @@ class SocialLoginService {
       );
       final UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
+
+      await HiveLocalStorage.write(
+          boxName: LocalStorageTextUtils.currentRouteBox,
+          key: LocalStorageTextUtils.currentRouteKey,
+          value: SignInScreen.routeName);
 
       GoRouter.of(RoutesUtils.cNavigatorState.currentState!.context)
           .go(DashBoardScreen.routeName);

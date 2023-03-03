@@ -147,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   color: AppColors.appcolor,
                                 ),
                           validator: (value) {
-                            return ValidatorHelpers.validateName(value);
+                            return ValidatorHelpers.validatePassword(value);
                           },
                         ),
                       ],
@@ -176,10 +176,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       radius: 12,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          // toNext(
-                          //     context: context, widget: BackgroundCheckView());
-                          // authProvider.sendLoginApiRequest(
-                          //     emailController.text, passwordController.text);
+                          authProvider.sendLoginApiRequestProvider(
+                              emailController.text, passwordController.text);
                         }
                       }),
                   const SizedBox(

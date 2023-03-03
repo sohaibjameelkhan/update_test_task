@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_project/src/modules/authenticationModule/screens/signup_screen.dart';
+import 'package:test_project/src/configs/utils/local_storage_text_utils.dart';
+import 'package:test_project/src/modules/authenticationModule/screens/sign_in_screen.dart';
+import 'package:test_project/src/modules/myProfileModule/screens/dashboard_screen.dart';
+
+import '../../../configs/helpers/hive_local_storage.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "/SplashScreen";
@@ -18,9 +22,18 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-  checkStatus() {
+  checkStatus() async {
+    String currentRoute = await HiveLocalStorage.readHiveValue<String>(
+          boxName: LocalStorageTextUtils.currentRouteBox,
+          key: LocalStorageTextUtils.currentRouteKey,
+        ) ??
+        '';
     Future.delayed(const Duration(seconds: 2)).whenComplete(() {
-      GoRouter.of(context).go(SignUpScreen.routeName);
+      if (currentRoute == SignInScreen.routeName) {
+        GoRouter.of(context).go(DashBoardScreen.routeName);
+      } else {
+        GoRouter.of(context).go(SignInScreen.routeName);
+      }
     });
   }
 

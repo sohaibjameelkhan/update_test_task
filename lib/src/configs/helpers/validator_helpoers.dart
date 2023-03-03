@@ -51,4 +51,13 @@ class ValidatorHelpers {
     }
     return null;
   }
+
+  static String? validatePassword(String? value) {
+    if (value!.isEmpty) {
+      return "Please Enter Password";
+    } else if (!RegExp(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
+        .hasMatch(value)) {
+      return "Please Enter Strong Password";
+    }
+  }
 }

@@ -51,7 +51,8 @@ class AuthenticationProvider extends ChangeNotifier {
 
   AuthenticationServices authServices = AuthenticationServices();
 
-  sendSignUpApiRequest(String name, String email, String password) async {
+  sendSignUpApiRequestProvider(
+      String name, String email, String password) async {
     try {
       makeLoadingTrue();
       Response? response = await authServices
@@ -63,6 +64,21 @@ class AuthenticationProvider extends ChangeNotifier {
       notifyListeners();
 
       dp(msg: "register api model provider print", arg: response!.toString());
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(content: e.toString());
+      // TODO
+    }
+  }
+
+  sendLoginApiRequestProvider(String email, String password) async {
+    try {
+      makeLoadingTrue();
+      authServices.postLoginRequest(email, password).whenComplete(() {
+        makeLoadingFalse();
+      });
+
+      notifyListeners();
     } on Exception catch (e) {
       makeLoadingFalse();
       showErrorSnackBarMessage(content: e.toString());
