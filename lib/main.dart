@@ -7,7 +7,7 @@ import 'package:test_project/servicesimplement/services_implement.dart';
 import 'package:test_project/translations/codegen_loader.g.dart';
 
 import 'app.dart';
-import 'configs/helpers/http_api_helper.dart';
+import 'configs/helpers/dio_api_helper.dart';
 
 Future<void> main() async {
   //

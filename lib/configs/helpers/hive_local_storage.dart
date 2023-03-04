@@ -1,9 +1,10 @@
 import 'package:hive/hive.dart';
 
 import '../utils/log_utils.dart';
-
+// This class is responsible for performing operations on a Hive database
 class HiveLocalStorage {
   //
+  // This function is responsible for opening the specified Hive box
   static Future<Box> openHiveBox(String boxName) async {
     try {
       return await Hive.openBox(boxName);
@@ -12,7 +13,7 @@ class HiveLocalStorage {
       return Hive.box(boxName);
     }
   }
-
+/// This function is responsible for adding a list of values to a specified box
   static Future addListData({var value, required String boxName}) async {
     try {
       var box = await openHiveBox(boxName);
@@ -21,7 +22,7 @@ class HiveLocalStorage {
       dp(msg: "Error in read", arg: e);
     }
   }
-
+/// This function is responsible for reading the values from the specified Hive box
   static Future<List?> getListData(
       {String? key, required String boxName}) async {
     //
@@ -36,7 +37,7 @@ class HiveLocalStorage {
       return null;
     }
   }
-
+// This function is responsible for writing the specified value to the specified Hive box
   static Future write({var value, String? key, required String boxName}) async {
     try {
       var box = await openHiveBox(boxName);

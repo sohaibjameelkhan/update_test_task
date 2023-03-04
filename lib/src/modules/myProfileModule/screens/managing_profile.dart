@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/configs/utils/app_colors.dart';
-import 'package:test_project/configs/utils/log_utils.dart';
 import 'package:test_project/src/commonwidget/cached_network_widget.dart';
 
 import '../../../../configs/utils/snackbar_utils.dart';
@@ -211,27 +209,27 @@ class _ManageProfileState extends State<ManageProfile> {
                                 controller: nameController,
                                 prefixIcn: Icons.person,
                               ),
-                              ProfileTextFiled(
-                                ontap: () {
-                                  showCountryPicker(
-                                    context: context,
-                                    exclude: [],
-                                    showPhoneCode: true,
-                                    // optional. Shows phone code before the country name.
-                                    onSelect: (Country country) {
-                                      countryController.text = country.name;
-                                      //FocusScope.of(context).unfocus();
-                                      dp(
-                                          msg: "selected country",
-                                          arg: country.countryCode);
-                                    },
-                                  );
-                                },
-                                hintText: "country",
-                                obs_text: false,
-                                controller: countryController,
-                                prefixIcn: Icons.flag,
-                              ),
+                              // ProfileTextFiled(
+                              //   ontap: () {
+                              //     showCountryPicker(
+                              //       context: context,
+                              //       exclude: [],
+                              //       showPhoneCode: true,
+                              //       // optional. Shows phone code before the country name.
+                              //       onSelect: (Country country) {
+                              //         countryController.text = country.name;
+                              //         //FocusScope.of(context).unfocus();
+                              //         dp(
+                              //             msg: "selected country",
+                              //             arg: country.countryCode);
+                              //       },
+                              //     );
+                              //   },
+                              //   hintText: "country",
+                              //   obs_text: false,
+                              //   controller: countryController,
+                              //   prefixIcn: Icons.flag,
+                              // ),
                               ProfileTextFiled(
                                 hintText: " Please Enter Phone Number",
                                 obs_text: false,

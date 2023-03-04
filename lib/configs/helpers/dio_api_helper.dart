@@ -42,12 +42,15 @@ class HttpApiHelper {
       return null;
     } on SocketException catch (e) {
       dp(msg: "No Internet Connection", arg: e.toString());
+      showErrorSnackBarMessage(content: "No Internet Connection");
       throw FetchDataException('No Internet connection');
     } catch (e) {
       dp(msg: "catch ", arg: e.toString());
       rethrow;
     }
   }
+
+  //// This method makes an asynchronous POST request and returns a Response type object if successful
 
   Future<Response?> post(
     String url,
@@ -58,7 +61,9 @@ class HttpApiHelper {
           key: LocalStorageTextUtils.userTokenKey,
         ) ??
         '';
+
     dp(msg: "user token during post request", arg: userToken.toString());
+    // Attempt to make an asynchronous POST request
     try {
       final Response response = await dio.post(url,
           options: Options(headers: {
@@ -68,13 +73,17 @@ class HttpApiHelper {
           }),
           data: jsonEncode(body));
 
-      dp(msg: "get response", arg: response.data.toString());
+      // Log the response
 
+      dp(msg: "get response", arg: response.data.toString());
+// Return the response
       return response;
     } on DioError catch (e) {
       return showErrorSnackBarMessage(
           content: e.response!.data["message"].toString());
+      // Handle SocketException (no internet connection)
     } on SocketException catch (e) {
+      showErrorSnackBarMessage(content: "No Internet Connection");
       dp(msg: "No Internet Connection", arg: e.toString());
       throw FetchDataException('No Internet connection');
     } catch (e) {

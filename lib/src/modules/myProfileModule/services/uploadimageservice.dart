@@ -26,7 +26,7 @@ abstract class UploadImageService {
 
     FormData formData = FormData.fromMap({
       "name": name,
-      "country": country,
+      //  "country": country,
       "phone": phoneNumber,
       "profile_image":
           await MultipartFile.fromFile(file.path, filename: fileName),

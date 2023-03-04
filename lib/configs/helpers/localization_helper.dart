@@ -10,7 +10,5 @@ class LocalizationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Map<String, String> get translations =>
-  //     EasyLocalization.of(RoutesUtils.cNavigatorState.currentState!.context)!
-  //         .translations;
+
 }
