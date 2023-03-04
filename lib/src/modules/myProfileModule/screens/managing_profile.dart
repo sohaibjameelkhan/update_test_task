@@ -1,15 +1,18 @@
 import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:test_project/configs/utils/log_utils.dart';
-import 'package:test_project/src/commonWidgets/custom_loader_widget.dart';
 import 'package:test_project/configs/utils/app_colors.dart';
+import 'package:test_project/configs/utils/log_utils.dart';
 import 'package:test_project/src/commonwidget/cached_network_widget.dart';
-import '../../../commonWidgets/button_widget.dart';
+
 import '../../../../configs/utils/snackbar_utils.dart';
+import '../../../../translations/locale_keys.g.dart';
+import '../../../commonwidget/button_widget.dart';
+import '../../../commonwidget/custom_loader_widget.dart';
 import '../viewmodel/profile_viewmodel.dart';
 import '../widgets/manage_profile_txtfield.dart';
 
@@ -108,9 +111,9 @@ class _ManageProfileState extends State<ManageProfile> {
                   ),
                 ),
               ),
-              title: const Text(
-                "Manager User Profile",
-                style: TextStyle(
+              title: Text(
+                LocaleKeys.manageUserProfile.toString().tr(),
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 17,
                     fontWeight: FontWeight.w500),
@@ -188,17 +191,19 @@ class _ManageProfileState extends State<ManageProfile> {
                           key: form,
                           child: Column(
                             children: [
-                              ProfileTextFiled(
-                                hintText: "Please Enter Email",
-                                obs_text: false,
-                                controller: emailController,
-                                //lblTxt: 'Full Name',
-                                prefixIcn: Icons.email,
-                                // validator: (text) {
-                                //   if (!text!.isEmpty) {
-                                //     return "Enter email";
-                                //   }
-                                // },
+                              IgnorePointer(
+                                child: ProfileTextFiled(
+                                  hintText: "Please Enter Email",
+                                  obs_text: false,
+                                  controller: emailController,
+                                  //lblTxt: 'Full Name',
+                                  prefixIcn: Icons.email,
+                                  // validator: (text) {
+                                  //   if (!text!.isEmpty) {
+                                  //     return "Enter email";
+                                  //   }
+                                  // },
+                                ),
                               ),
                               ProfileTextFiled(
                                 hintText: "Please Enter Name",
@@ -240,7 +245,7 @@ class _ManageProfileState extends State<ManageProfile> {
                           height: 80,
                         ),
                         CommonButtonWidget(
-                            text: "Update Profile",
+                            text: LocaleKeys.updateProfile.toString().tr(),
                             horizontalPadding: 6,
                             textfont: 14,
                             onTap: () {
@@ -255,16 +260,7 @@ class _ManageProfileState extends State<ManageProfile> {
                                   phoneNoController.text == null) {
                                 showErrorSnackBarMessage(
                                     content: "Please Select Country To Update");
-                              }
-
-                              // else if (phoneNoController.text.isEmpty) {
-                              //   showErrorSnackBarMessage(
-                              //       context:
-                              //           navstate.currentState!.context,
-                              //       content:
-                              //           "Please Enter PhoneNumber To Update");
-                              // }
-                              else {
+                              } else {
                                 if (userProfileProvider.croppedImage == null) {
                                   userProfileProvider
                                       .updateWithOutImageProfileProvider(

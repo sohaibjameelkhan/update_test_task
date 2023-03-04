@@ -1,16 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/configs/helpers/validator_helpoers.dart';
 import 'package:test_project/src/modules/authenticationmodule/screens/sign_in_screen.dart';
+
 import '../../../../configs/utils/app_colors.dart';
 import '../../../../configs/utils/frontend_text_utils.dart';
 import '../../../../configs/utils/theme.dart';
-import '../../../commonWidgets/button_widget.dart';
-import '../../../commonWidgets/custom_loader_widget.dart';
+import '../../../../translations/locale_keys.g.dart';
+import '../../../commonwidget/button_widget.dart';
+import '../../../commonwidget/custom_loader_widget.dart';
+import '../../../commonwidget/textfield_widget.dart';
 import '../viewmodel/authentication_viewmodel.dart';
 import '../widgets/social_button_widget.dart';
-import '../../../commonWidgets/textfield_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = "/SignUpScreen";
@@ -88,9 +91,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        FrontEndTextUtils.createAccount,
-                        style: fontW7S12(context)!
-                            .copyWith(fontWeight: FontWeight.w900),
+                        LocaleKeys.createAccount.toString().tr(),
+                        style: fontW7S12(context)!.copyWith(
+                            fontWeight: FontWeight.w900, fontSize: 35),
                       ),
                     ],
                   ),
@@ -98,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   SocialButtonWidget(
-                    text: FrontEndTextUtils.continueWithGoogle,
+                    text: LocaleKeys.continueWithGoogle.toString().tr(),
                     icon: 'assets/images/googleicon.svg',
                     onTap: () {
                       authProvider.loginWithGoogle();
@@ -120,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             maxlines: 1,
                             showSuffixIcon: false,
                             toppadding: 18,
-                            hintText: FrontEndTextUtils.email,
+                            hintText: LocaleKeys.email.toString().tr(),
                             textInputType: TextInputType.emailAddress,
                             validator: (String? value) {
                               return ValidatorHelpers.validateEmail(value);
@@ -134,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             maxlines: 1,
                             showSuffixIcon: false,
                             toppadding: 18,
-                            hintText: FrontEndTextUtils.name,
+                            hintText: LocaleKeys.name.toString().tr(),
                             textInputType: TextInputType.name,
                             validator: (String? value) {
                               return ValidatorHelpers.validateName(value);
@@ -148,7 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           maxlines: 1,
                           showSuffixIcon: true,
                           toppadding: 18,
-                          hintText: FrontEndTextUtils.password,
+                          hintText: LocaleKeys.password.toString().tr(),
                           textInputType: TextInputType.visiblePassword,
                           onsuffixIconTap: () {
                             authProvider.visiblePasswordChange();
@@ -189,7 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   Icons.visibility,
                                   color: AppColors.appcolor,
                                 ),
-                          hintText: FrontEndTextUtils.confirmPassword,
+                          hintText: LocaleKeys.confirmPassword.toString().tr(),
                           textInputType: TextInputType.visiblePassword,
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -207,7 +210,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   CommonButtonWidget(
                       horizontalPadding: 0,
-                      text: FrontEndTextUtils.createAccount,
+                      text: LocaleKeys.createAccount.toString().tr(),
                       radius: 12,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
@@ -215,11 +218,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               nameController.text,
                               emailController.text,
                               passwordController.text);
-                          // GoRouter.of(context).go(DashBoardScreen.routeName);
-
-                          //toNext(context: context, widget: BackgroundCheckView());
-                          // authProvider.sendLoginApiRequest(
-                          //     emailController.text, passwordController.text);
                         }
                       }),
                   const SizedBox(
@@ -230,7 +228,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       bordercolor: AppColors.greyColor.withOpacity(0.4),
                       backgroundcolor: AppColors.whitecolor,
                       textcolor: AppColors.blackColor,
-                      text: FrontEndTextUtils.signIn,
+                      text: LocaleKeys.signIn.toString().tr(),
                       radius: 12,
                       onTap: () {
                         GoRouter.of(context).go(SignInScreen.routeName);
@@ -244,16 +242,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       softWrap: true,
                       text: TextSpan(
                         children: [
-                          TextSpan(text: FrontEndTextUtils.byCreatingAccount),
+                          TextSpan(
+                              text:
+                                  LocaleKeys.byCreatingAccount.toString().tr(),
+                              style: TextStyle(fontSize: 13)),
                           TextSpan(
                               text: FrontEndTextUtils.termsAndCondition,
                               style: fontW4S12(context)!.copyWith(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.appcolor)),
-                          TextSpan(text: FrontEndTextUtils.and),
                           TextSpan(
-                              text: FrontEndTextUtils.privacyPolicy,
+                              text: LocaleKeys.and.toString().tr(),
+                              style: TextStyle(fontSize: 13)),
+                          TextSpan(
+                              text: LocaleKeys.privacyPolicy.toString().tr(),
                               style: fontW4S12(context)!.copyWith(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,

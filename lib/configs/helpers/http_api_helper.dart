@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:test_project/configs/utils/snackbar_utils.dart';
 
 import '../utils/local_storage_text_utils.dart';
 import '../utils/log_utils.dart';
@@ -61,7 +62,7 @@ class HttpApiHelper {
     try {
       final Response response = await dio.post(url,
           options: Options(headers: {
-            "x-api-channel": "getpaid-app",
+            //   "x-api-channel": "getpaid-app",
             "Content-Type": "application/json",
             'Authorization': 'Bearer $userToken',
           }),
@@ -69,12 +70,10 @@ class HttpApiHelper {
 
       dp(msg: "get response", arg: response.data.toString());
 
-      if (response.statusCode == 200) {
-        dp(msg: "response", arg: response.data.toString());
-
-        return response;
-      }
       return response;
+    } on DioError catch (e) {
+      return showErrorSnackBarMessage(
+          content: e.response!.data["message"].toString());
     } on SocketException catch (e) {
       dp(msg: "No Internet Connection", arg: e.toString());
       throw FetchDataException('No Internet connection');

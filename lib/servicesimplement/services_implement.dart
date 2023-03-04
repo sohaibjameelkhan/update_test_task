@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -11,14 +10,15 @@ import 'package:test_project/configs/utils/routes_utils.dart';
 import 'package:test_project/src/modules/authenticationmodule/services/authentication_services.dart';
 import 'package:test_project/src/modules/authenticationmodule/services/social_login_services.dart';
 import 'package:test_project/src/modules/myProfileModule/services/uploadimageservice.dart';
+
 import '../configs/helpers/hive_local_storage.dart';
 import '../configs/helpers/http_api_helper.dart';
 import '../configs/utils/api_endpoints.dart';
+import '../configs/utils/log_utils.dart';
 import '../configs/utils/snackbar_utils.dart';
 import '../src/modules/authenticationmodule/screens/sign_in_screen.dart';
 import '../src/modules/myProfileModule/models/user_profile_model.dart';
 import '../src/modules/myProfileModule/screens/dashboard_screen.dart';
-import '../configs/utils/log_utils.dart';
 import '../src/modules/myProfileModule/services/profile_services.dart';
 
 class ServicesImplementation
@@ -41,7 +41,7 @@ class ServicesImplementation
       ApiEndPoints.userProfileUrl,
     );
 
-    var jsonResponse = jsonDecode(response!.data);
+    var jsonResponse = response!.data;
 
     if (response.statusCode == 200) {
     } else {
@@ -62,21 +62,21 @@ class ServicesImplementation
     final Response? response = await httpApiHelper.post(
         ApiEndPoints.registerUrl,
         {"name": name, "email": email, "password": password});
-    var jsonResponse = jsonDecode(response!.data);
+    var jsonResponse = response!.data;
 
     dp(msg: "user token", arg: jsonResponse);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 400) {
       dp(msg: "user signup status", arg: jsonResponse["message"]);
-
       showSucessrSnackBarMessage(content: jsonResponse["message"]);
       GoRouter.of(RoutesUtils.cNavigatorState.currentState!.context)
           .go(SignInScreen.routeName);
-    } else {
-      showErrorSnackBarMessage(content: jsonResponse["message"]);
-
       dp(msg: "authentication json response", arg: jsonResponse.toString());
       dp(msg: "response message", arg: jsonResponse["status"].toString());
+    } else if (response.statusCode == 400) {
+      showErrorSnackBarMessage(content: jsonResponse["message"]);
+    } else {
+      showErrorSnackBarMessage(content: response.statusMessage.toString());
     }
 
     return response;
@@ -88,7 +88,7 @@ class ServicesImplementation
   Future<Response?> postLoginRequest(String email, String password) async {
     final Response? response = await httpApiHelper
         .post(ApiEndPoints.loginUrl, {"email": email, "password": password});
-    var jsonResponse = jsonDecode(response!.data);
+    var jsonResponse = response!.data;
 
     dp(msg: "user response", arg: jsonResponse);
 

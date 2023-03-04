@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +11,7 @@ import 'package:test_project/configs/utils/theme.dart';
 
 import '../../../../configs/utils/api_endpoints.dart';
 import '../../../../configs/utils/log_utils.dart';
+import '../../../../translations/locale_keys.g.dart';
 import '../models/user_profile_model.dart';
 import '../services/profile_services.dart';
 import '../services/uploadimageservice.dart';
@@ -66,8 +68,9 @@ class ProfileViewModel extends ChangeNotifier {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              "Choose option",
-              style: fontW3S12(context)!.copyWith(color: AppColors.whitecolor),
+              LocaleKeys.chooseOption.toString().tr(),
+              style: fontW3S12(context)!
+                  .copyWith(color: AppColors.whitecolor, fontSize: 25),
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -79,9 +82,9 @@ class ProfileViewModel extends ChangeNotifier {
                       //_openGallery(context);
                     },
                     title: Text(
-                      "Gallery",
+                      LocaleKeys.gallery.toString().tr(),
                       style: fontW3S12(context)!
-                          .copyWith(color: AppColors.whitecolor),
+                          .copyWith(color: AppColors.whitecolor, fontSize: 15),
                     ),
                     leading: const Icon(
                       Icons.account_box,
@@ -95,9 +98,9 @@ class ProfileViewModel extends ChangeNotifier {
                       //  _openCamera(context);
                     },
                     title: Text(
-                      "Camera",
+                      LocaleKeys.camera.toString().tr(),
                       style: fontW3S12(context)!
-                          .copyWith(color: AppColors.whitecolor),
+                          .copyWith(color: AppColors.whitecolor, fontSize: 15),
                     ),
                     leading:
                         const Icon(Icons.camera, color: AppColors.whitecolor),

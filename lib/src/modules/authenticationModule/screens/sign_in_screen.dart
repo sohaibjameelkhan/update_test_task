@@ -1,15 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:test_project/configs/helpers/validator_helpoers.dart';
-import 'package:test_project/src/commonWidgets/custom_loader_widget.dart';
-import 'package:test_project/src/modules/authenticationmodule/viewmodel/authentication_viewmodel.dart';
 import 'package:test_project/src/modules/authenticationmodule/screens/signup_screen.dart';
-import '../../../commonWidgets/textfield_widget.dart';
+import 'package:test_project/src/modules/authenticationmodule/viewmodel/authentication_viewmodel.dart';
+import 'package:test_project/translations/locale_keys.g.dart';
+
 import '../../../../configs/utils/app_colors.dart';
 import '../../../../configs/utils/frontend_text_utils.dart';
 import '../../../../configs/utils/theme.dart';
-import '../../../commonWidgets/button_widget.dart';
+import '../../../commonwidget/button_widget.dart';
+import '../../../commonwidget/custom_loader_widget.dart';
+import '../../../commonwidget/textfield_widget.dart';
 import '../widgets/social_button_widget.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -87,16 +90,16 @@ class _SignInScreenState extends State<SignInScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        FrontEndTextUtils.signIn,
-                        style: fontW7S12(context)!
-                            .copyWith(fontWeight: FontWeight.w900),
+                        LocaleKeys.signIn.toString().tr(),
+                        style: fontW7S12(context)!.copyWith(
+                            fontWeight: FontWeight.w900, fontSize: 35),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
-                        FrontEndTextUtils.pleaseenteryourcredentials,
-                        style: fontW3S12(context),
+                        LocaleKeys.pleaseenteryourcredentials.tr(),
+                        style: fontW3S12(context)!.copyWith(fontSize: 17),
                       ),
                     ],
                   ),
@@ -104,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 25,
                   ),
                   SocialButtonWidget(
-                    text: FrontEndTextUtils.continueWithGoogle,
+                    text: LocaleKeys.continueWithGoogle.tr(),
                     icon: 'assets/images/googleicon.svg',
                     onTap: () {
                       authProvider.loginWithGoogle();
@@ -123,7 +126,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             maxlines: 1,
                             showSuffixIcon: false,
                             toppadding: 12,
-                            hintText: FrontEndTextUtils.email,
+                            hintText: LocaleKeys.email.tr(),
                             textInputType: TextInputType.emailAddress,
                             validator: (String? value) {
                               return ValidatorHelpers.validateEmail(value);
@@ -137,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           maxlines: 1,
                           showSuffixIcon: true,
                           toppadding: 24,
-                          hintText: FrontEndTextUtils.password,
+                          hintText: LocaleKeys.password.tr(),
                           textInputType: TextInputType.emailAddress,
                           onsuffixIconTap: () {
                             authProvider.visiblePasswordChange();
@@ -169,8 +172,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       //     widget: const ForgotPasswordScreen());
                     },
                     child: Text(
-                      FrontEndTextUtils.forgotPassword,
-                      style: fontW3S12(context)!.copyWith(),
+                      LocaleKeys.forgotPassword.tr(),
+                      style: fontW3S12(context)!.copyWith(fontSize: 14),
                     ),
                   ),
                   const SizedBox(
@@ -178,7 +181,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   CommonButtonWidget(
                       horizontalPadding: 0,
-                      text: FrontEndTextUtils.signIn,
+                      text: LocaleKeys.signIn.tr(),
                       radius: 12,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
@@ -194,7 +197,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       bordercolor: AppColors.greyColor.withOpacity(0.4),
                       backgroundcolor: AppColors.whitecolor,
                       textcolor: AppColors.blackColor,
-                      text: FrontEndTextUtils.createAccount,
+                      text: LocaleKeys.createAccount.tr(),
                       radius: 12,
                       onTap: () {
                         GoRouter.of(context).go(SignUpScreen.routeName);
@@ -209,16 +212,20 @@ class _SignInScreenState extends State<SignInScreen> {
                       softWrap: true,
                       text: TextSpan(
                         children: [
-                          TextSpan(text: FrontEndTextUtils.bySigningIn),
                           TextSpan(
-                              text: FrontEndTextUtils.termsAndCondition,
+                              text: LocaleKeys.bySigningIn.tr(),
+                              style: TextStyle(fontSize: 12)),
+                          TextSpan(
+                              text: LocaleKeys.termsAndCondition.tr(),
                               style: fontW4S12(context)!.copyWith(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.appcolor)),
-                          TextSpan(text: FrontEndTextUtils.and),
                           TextSpan(
-                              text: FrontEndTextUtils.privacyPolicy,
+                              text: LocaleKeys.and.tr(),
+                              style: TextStyle(fontSize: 12)),
+                          TextSpan(
+                              text: LocaleKeys.privacyPolicy.tr(),
                               style: fontW4S12(context)!.copyWith(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,

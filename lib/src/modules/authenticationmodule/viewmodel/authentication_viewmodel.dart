@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart';
 import 'package:test_project/configs/utils/local_storage_text_utils.dart';
 import 'package:test_project/configs/utils/snackbar_utils.dart';
 import 'package:test_project/src/modules/authenticationmodule/screens/sign_in_screen.dart';
@@ -74,7 +73,7 @@ class AuthenticationViewModel extends ChangeNotifier {
       );
     } on Exception catch (e) {
       makeLoadingFalse();
-      showErrorSnackBarMessage(content: e.toString());
+      //showErrorSnackBarMessage(content: e.toString());
       // TODO
     }
   }

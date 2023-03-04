@@ -36,7 +36,7 @@ class _ProfileTextFiledState extends State<ProfileTextFiled> {
         obscureText: widget.obs_text,
         controller: widget.controller,
         validator: widget.validator,
-        style: TextStyle(fontSize: 13),
+        style: TextStyle(fontSize: 13, color: Colors.black),
         decoration: InputDecoration(
             hintText: widget.hintText,
             contentPadding: EdgeInsets.only(left: 20),

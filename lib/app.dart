@@ -1,13 +1,15 @@
-import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:test_project/configs/helpers/theme_helper.dart';
 import 'package:test_project/configs/utils/routes_utils.dart';
-import 'package:test_project/configs/utils/theme.dart';
 import 'package:test_project/servicesimplement/services_implement.dart';
 import 'package:test_project/src/modules/authenticationmodule/viewmodel/authentication_viewmodel.dart';
 import 'package:test_project/src/modules/myProfileModule/viewmodel/profile_viewmodel.dart';
+
+import 'configs/helpers/localization_helper.dart';
 
 class App extends StatelessWidget {
   const App({super.key, required this.servicesImplementation});
@@ -26,6 +28,8 @@ class App extends StatelessWidget {
             create: (context) => ProfileViewModel(
                 servicesImplementation, servicesImplementation),
           ),
+          ChangeNotifierProvider(create: (_) => LocalizationProvider()),
+          ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ],
         child: ScreenUtilInit(
           designSize: const Size(428, 926),
@@ -48,9 +52,13 @@ class AppMaterial extends StatelessWidget {
         SystemChannels.textInput.invokeMethod('TextInput.hide');
       },
       child: MaterialApp.router(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         title: 'TestApp',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.themeData,
+        theme: Provider.of<ThemeProvider>(context).currentTheme,
+        //theme: AppTheme.themeData,
         routerConfig: routerConfigs,
       ),
     );
