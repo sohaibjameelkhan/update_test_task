@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 
-import '../configs/utils/app_colors.dart';
-import '../configs/utils/theme.dart';
+import '../../configs/utils/app_colors.dart';
+import '../../configs/utils/theme.dart';
 
 class CommonButtonWidget extends StatelessWidget {
   final String text;

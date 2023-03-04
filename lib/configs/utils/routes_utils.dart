@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:test_project/src/modules/authenticationModule/screens/sign_in_screen.dart';
-import 'package:test_project/src/modules/authenticationModule/screens/signup_screen.dart';
+import 'package:test_project/src/modules/authenticationmodule/screens/sign_in_screen.dart';
+import 'package:test_project/src/modules/authenticationmodule/screens/signup_screen.dart';
 import 'package:test_project/src/modules/myProfileModule/screens/dashboard_screen.dart';
 
-import '../../modules/authenticationModule/screens/splash_screen.dart';
-import '../../modules/myProfileModule/screens/managing_profile.dart';
+import '../../src/modules/authenticationmodule/screens/splash_screen.dart';
+import '../../src/modules/myProfileModule/screens/managing_profile.dart';
 
 class RoutesUtils {
   //

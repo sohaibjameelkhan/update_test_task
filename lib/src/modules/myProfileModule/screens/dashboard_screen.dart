@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:test_project/src/commonWidgets/button_widget.dart';
-import 'package:test_project/src/configs/utils/app_colors.dart';
-import 'package:test_project/src/modules/authenticationModule/providers/authentication_provider.dart';
+import 'package:test_project/configs/utils/app_colors.dart';
+import 'package:test_project/src/modules/authenticationmodule/viewmodel/authentication_viewmodel.dart';
 
-import '../../../configs/helpers/hive_local_storage.dart';
-import '../../../configs/utils/local_storage_text_utils.dart';
-import '../../../configs/utils/theme.dart';
+import '../../../../configs/helpers/hive_local_storage.dart';
+import '../../../../configs/utils/local_storage_text_utils.dart';
+import '../../../../configs/utils/theme.dart';
+import '../../../commonWidgets/button_widget.dart';
 import 'managing_profile.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -71,7 +71,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           const SizedBox(
             height: 15,
           ),
-          Consumer<AuthenticationProvider>(
+          Consumer<AuthenticationViewModel>(
               builder: (context, authenticationProvider, __) {
             return CommonButtonWidget(
                 text: "LogOut",

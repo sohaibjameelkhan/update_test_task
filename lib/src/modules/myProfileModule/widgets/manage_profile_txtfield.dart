@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test_project/src/configs/utils/app_colors.dart';
+import 'package:test_project/configs/utils/app_colors.dart';
 
-class txtfieldProfile extends StatefulWidget {
+class ProfileTextFiled extends StatefulWidget {
+  //
+
   final String hintText;
   final bool obs_text;
   final IconData prefixIcn;
@@ -10,7 +12,7 @@ class txtfieldProfile extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
 
-  const txtfieldProfile(
+  const ProfileTextFiled(
       {required this.obs_text,
       required this.hintText,
       this.ontap,
@@ -21,10 +23,10 @@ class txtfieldProfile extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<txtfieldProfile> createState() => _txtfieldProfileState();
+  State<ProfileTextFiled> createState() => _ProfileTextFiledState();
 }
 
-class _txtfieldProfileState extends State<txtfieldProfile> {
+class _ProfileTextFiledState extends State<ProfileTextFiled> {
   @override
   Widget build(BuildContext context) {
     return Padding(

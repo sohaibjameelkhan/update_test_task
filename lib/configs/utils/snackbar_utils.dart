@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/src/configs/utils/routes_utils.dart';
+import 'package:test_project/configs/utils/routes_utils.dart';
 
 //dp({msg, arg}) => debugPrint("\n\x1B[32m $msg =$arg \n ");
 
 pe({msg, arg}) => debugPrint(
       "\n\x1B[32m $msg =$arg \n ",
     );
-
-dp({msg, arg}) {
-  debugPrint("====   $msg                  $arg  ====");
-}
 
 showErrorSnackBarMessage(
     {required String content,

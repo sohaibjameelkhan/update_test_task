@@ -1,8 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
-import '../configs/utils/app_colors.dart';
+import '../../configs/utils/app_colors.dart';
 
 class CustomLoaderWidget extends StatelessWidget {
   final bool isLoading;

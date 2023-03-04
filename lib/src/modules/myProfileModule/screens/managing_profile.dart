@@ -4,14 +4,13 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:test_project/configs/utils/log_utils.dart';
 import 'package:test_project/src/commonWidgets/custom_loader_widget.dart';
-import 'package:test_project/src/configs/utils/app_colors.dart';
-
+import 'package:test_project/configs/utils/app_colors.dart';
+import 'package:test_project/src/commonwidget/cached_network_widget.dart';
 import '../../../commonWidgets/button_widget.dart';
-import '../../../commonWidgets/cacheNetworkImageWidget.dart';
-import '../../../configs/utils/snackbar_utils.dart';
-import '../providers/profile_provider.dart';
-import '../services/uploadimageservice.dart';
+import '../../../../configs/utils/snackbar_utils.dart';
+import '../viewmodel/profile_viewmodel.dart';
 import '../widgets/manage_profile_txtfield.dart';
 
 class ManageProfile extends StatefulWidget {
@@ -31,7 +30,6 @@ class _ManageProfileState extends State<ManageProfile> {
   TextEditingController emailController = TextEditingController();
   TextEditingController countryController = TextEditingController();
   TextEditingController phoneNoController = TextEditingController();
-  UploadImageService uploadImageService = UploadImageService();
 
   @override
   void initState() {
@@ -39,35 +37,43 @@ class _ManageProfileState extends State<ManageProfile> {
     super.initState();
   }
 
+  @override
+  dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    countryController.dispose();
+    phoneNoController.dispose();
+    super.dispose();
+  }
+
   initMethod() async {
-    await context.read<ProfileProvider>().getUserProfileProvider();
+    await context.read<ProfileViewModel>().getUserProfileProvider();
 
     await setControllerValues();
   }
 
   setControllerValues() {
     emailController = TextEditingController(
-        text: context.read<ProfileProvider>().userProfileModel!.data!.email ??
+        text: context.read<ProfileViewModel>().userProfileModel!.data!.email ??
             "");
     nameController = TextEditingController(
-        text:
-            context.read<ProfileProvider>().userProfileModel!.data!.name ?? "");
+        text: context.read<ProfileViewModel>().userProfileModel!.data!.name ??
+            "");
     phoneNoController = TextEditingController(
-        text: context.read<ProfileProvider>().userProfileModel!.data!.phone ??
+        text: context.read<ProfileViewModel>().userProfileModel!.data!.phone ??
             "");
     countryController = TextEditingController(
         text: context
-                .read<ProfileProvider>()
-                .userProfileModel!
-                .data!
-                .country
-                .toString() ??
-            "");
+            .read<ProfileViewModel>()
+            .userProfileModel!
+            .data!
+            .country
+            .toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProfileProvider>(
+    return Consumer<ProfileViewModel>(
         builder: (context, userProfileProvider, __) {
       return CustomLoaderWidget(
         isLoading: userProfileProvider.isLoading,
@@ -149,10 +155,9 @@ class _ManageProfileState extends State<ManageProfile> {
                                     height: 100,
                                     width: 100,
                                     builderHeight: 100,
-                                    builerWidth: 100,
+                                    builderWidth: 100,
                                     imgUrl:
-                                        "https://racingeye.softlinks.ae/${userProfileProvider.userProfileModel!.data!.imagePath}" ??
-                                            "",
+                                        "https://racingeye.softlinks.ae/${userProfileProvider.userProfileModel!.data!.imagePath}",
                                     radius: 17),
                             Padding(
                               padding: const EdgeInsets.only(left: 80, top: 65),
@@ -183,7 +188,7 @@ class _ManageProfileState extends State<ManageProfile> {
                           key: form,
                           child: Column(
                             children: [
-                              txtfieldProfile(
+                              ProfileTextFiled(
                                 hintText: "Please Enter Email",
                                 obs_text: false,
                                 controller: emailController,
@@ -195,13 +200,13 @@ class _ManageProfileState extends State<ManageProfile> {
                                 //   }
                                 // },
                               ),
-                              txtfieldProfile(
+                              ProfileTextFiled(
                                 hintText: "Please Enter Name",
                                 obs_text: false,
                                 controller: nameController,
                                 prefixIcn: Icons.person,
                               ),
-                              txtfieldProfile(
+                              ProfileTextFiled(
                                 ontap: () {
                                   showCountryPicker(
                                     context: context,
@@ -222,7 +227,7 @@ class _ManageProfileState extends State<ManageProfile> {
                                 controller: countryController,
                                 prefixIcn: Icons.flag,
                               ),
-                              txtfieldProfile(
+                              ProfileTextFiled(
                                 hintText: " Please Enter Phone Number",
                                 obs_text: false,
                                 controller: phoneNoController,

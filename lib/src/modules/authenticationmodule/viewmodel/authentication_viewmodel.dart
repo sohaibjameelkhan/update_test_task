@@ -3,15 +3,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
-import 'package:test_project/src/configs/utils/local_storage_text_utils.dart';
-import 'package:test_project/src/configs/utils/snackbar_utils.dart';
-import 'package:test_project/src/modules/authenticationModule/screens/sign_in_screen.dart';
-import 'package:test_project/src/modules/authenticationModule/services/authentication_services.dart';
-import 'package:test_project/src/modules/authenticationModule/services/social_login_services.dart';
+import 'package:test_project/configs/utils/local_storage_text_utils.dart';
+import 'package:test_project/configs/utils/snackbar_utils.dart';
+import 'package:test_project/src/modules/authenticationmodule/screens/sign_in_screen.dart';
 
-import '../../../configs/helpers/hive_local_storage.dart';
+import '../../../../configs/helpers/hive_local_storage.dart';
+import '../../../../configs/utils/log_utils.dart';
+import '../services/authentication_services.dart';
+import '../services/social_login_services.dart';
 
-class AuthenticationProvider extends ChangeNotifier {
+class AuthenticationViewModel extends ChangeNotifier {
+  AuthenticationServices _authServices;
+
+  SocialLoginService _socialLoginService;
+
+  AuthenticationViewModel(AuthenticationServices _authServices,
+      SocialLoginService socialLoginService)
+      : this._authServices = _authServices,
+        this._socialLoginService = socialLoginService;
+
   bool isLoading = false;
 
   makeLoadingTrue() {
@@ -23,8 +33,6 @@ class AuthenticationProvider extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
-
-  SocialLoginService socialLoginService = SocialLoginService();
 
   bool showconfirmobsecure = true;
   bool showpasswordobsecure = true;
@@ -49,13 +57,11 @@ class AuthenticationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  AuthenticationServices authServices = AuthenticationServices();
-
   sendSignUpApiRequestProvider(
       String name, String email, String password) async {
     try {
       makeLoadingTrue();
-      Response? response = await authServices
+      await _authServices
           .postSignUpRequest(name, email, password)
           .whenComplete(() {
         makeLoadingFalse();
@@ -63,7 +69,9 @@ class AuthenticationProvider extends ChangeNotifier {
 
       notifyListeners();
 
-      dp(msg: "register api model provider print", arg: response!.toString());
+      dp(
+        msg: "register api model provider print",
+      );
     } on Exception catch (e) {
       makeLoadingFalse();
       showErrorSnackBarMessage(content: e.toString());
@@ -74,7 +82,7 @@ class AuthenticationProvider extends ChangeNotifier {
   sendLoginApiRequestProvider(String email, String password) async {
     try {
       makeLoadingTrue();
-      authServices.postLoginRequest(email, password).whenComplete(() {
+      _authServices.postLoginRequest(email, password).whenComplete(() {
         makeLoadingFalse();
       });
 
@@ -89,7 +97,7 @@ class AuthenticationProvider extends ChangeNotifier {
   loginWithGoogle() async {
     try {
       makeLoadingTrue();
-      socialLoginService.signInWithGoogle().whenComplete(() {
+      _socialLoginService.signInWithGoogle().whenComplete(() {
         makeLoadingFalse();
       });
       // userCredential.user.
@@ -112,7 +120,7 @@ class AuthenticationProvider extends ChangeNotifier {
     await HiveLocalStorage.deleteHiveValue(
         boxName: LocalStorageTextUtils.userTokenBox,
         key: LocalStorageTextUtils.userTokenKey);
-    //await authServices.logoutUser();
+    //await _authServices.logoutUser();
     GoogleSignIn().signOut();
     // FacebookAuth.instance.logOut();
     GoRouter.of(context).go(SignInScreen.routeName);

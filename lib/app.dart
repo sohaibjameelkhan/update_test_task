@@ -1,24 +1,30 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:test_project/src/configs/utils/routes_utils.dart';
-import 'package:test_project/src/configs/utils/theme.dart';
-import 'package:test_project/src/modules/authenticationModule/providers/authentication_provider.dart';
-import 'package:test_project/src/modules/myProfileModule/providers/profile_provider.dart';
+import 'package:test_project/configs/utils/routes_utils.dart';
+import 'package:test_project/configs/utils/theme.dart';
+import 'package:test_project/servicesimplement/services_implement.dart';
+import 'package:test_project/src/modules/authenticationmodule/viewmodel/authentication_viewmodel.dart';
+import 'package:test_project/src/modules/myProfileModule/viewmodel/profile_viewmodel.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key, required this.servicesImplementation});
+
+  final ServicesImplementation servicesImplementation;
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (context) => AuthenticationProvider(),
+            create: (context) => AuthenticationViewModel(
+                servicesImplementation, servicesImplementation),
           ),
           ChangeNotifierProvider(
-            create: (context) => ProfileProvider(),
+            create: (context) => ProfileViewModel(
+                servicesImplementation, servicesImplementation),
           ),
         ],
         child: ScreenUtilInit(

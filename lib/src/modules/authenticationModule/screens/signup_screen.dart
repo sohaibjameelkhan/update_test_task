@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:test_project/src/commonWidgets/custom_loader_widget.dart';
-import 'package:test_project/src/configs/helpers/validator_helpoers.dart';
-import 'package:test_project/src/modules/authenticationModule/screens/sign_in_screen.dart';
-
+import 'package:test_project/configs/helpers/validator_helpoers.dart';
+import 'package:test_project/src/modules/authenticationmodule/screens/sign_in_screen.dart';
+import '../../../../configs/utils/app_colors.dart';
+import '../../../../configs/utils/frontend_text_utils.dart';
+import '../../../../configs/utils/theme.dart';
 import '../../../commonWidgets/button_widget.dart';
-import '../../../commonWidgets/textfield_widget.dart';
-import '../../../configs/utils/app_colors.dart';
-import '../../../configs/utils/frontend_text_utils.dart';
-import '../../../configs/utils/theme.dart';
-import '../providers/authentication_provider.dart';
+import '../../../commonWidgets/custom_loader_widget.dart';
+import '../viewmodel/authentication_viewmodel.dart';
 import '../widgets/social_button_widget.dart';
+import '../../../commonWidgets/textfield_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = "/SignUpScreen";
@@ -31,8 +30,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController confirmPasswordController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Consumer<AuthenticationProvider>(
+    return Consumer<AuthenticationViewModel>(
         builder: (context, authProvider, __) {
       return CustomLoaderWidget(
         isLoading: authProvider.isLoading,
