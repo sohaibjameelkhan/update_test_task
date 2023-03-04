@@ -8,7 +8,6 @@ import 'package:test_project/src/modules/authenticationmodule/viewmodel/authenti
 
 import '../../../../configs/helpers/hive_local_storage.dart';
 import '../../../../configs/utils/local_storage_text_utils.dart';
-import '../../../../configs/utils/theme.dart';
 import '../../../../translations/locale_keys.g.dart';
 import '../../../commonwidget/button_widget.dart';
 import 'managing_profile.dart';
@@ -105,7 +104,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           ),
           Consumer<ThemeProvider>(builder: (context, themeProvider, __) {
             return CommonButtonWidget(
-                text: 'Switch to ${themeProvider.currentType.name} theme',
+                text: 'Change Theme',
                 backgroundcolor: AppColors.blackColor,
                 bordercolor: AppColors.blackColor,
                 textfont: 15,

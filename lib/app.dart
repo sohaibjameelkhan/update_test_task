@@ -57,6 +57,8 @@ class AppMaterial extends StatelessWidget {
         locale: context.locale,
         title: 'TestApp',
         debugShowCheckedModeBanner: false,
+
+        // darkTheme: AppTheme.themeDarkData,
         theme: Provider.of<ThemeProvider>(context).currentTheme,
         //theme: AppTheme.themeData,
         routerConfig: routerConfigs,

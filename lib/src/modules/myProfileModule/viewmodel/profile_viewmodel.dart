@@ -7,8 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:test_project/configs/helpers/get_image_helpers.dart';
 import 'package:test_project/configs/utils/app_colors.dart';
 import 'package:test_project/configs/utils/snackbar_utils.dart';
-import 'package:test_project/configs/utils/theme.dart';
 
+import '../../../../configs/helpers/theme_helper.dart';
 import '../../../../configs/utils/api_endpoints.dart';
 import '../../../../configs/utils/log_utils.dart';
 import '../../../../translations/locale_keys.g.dart';
