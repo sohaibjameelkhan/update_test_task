@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../configs/helpers/theme_helper.dart';
 import '../../../../configs/utils/app_colors.dart';
-import '../../../../configs/utils/theme.dart';
 
 class SocialButtonWidget extends StatelessWidget {
   final String text;

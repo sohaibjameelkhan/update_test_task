@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:test_project/configs/helpers/validator_helpoers.dart';
 import 'package:test_project/src/modules/authenticationmodule/screens/sign_in_screen.dart';
 
+import '../../../../configs/helpers/theme_helper.dart';
 import '../../../../configs/utils/app_colors.dart';
 import '../../../../configs/utils/frontend_text_utils.dart';
-import '../../../../configs/utils/theme.dart';
 import '../../../../translations/locale_keys.g.dart';
 import '../../../commonwidget/button_widget.dart';
 import '../../../commonwidget/custom_loader_widget.dart';
@@ -122,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             textFieldHeight: 50,
                             maxlines: 1,
                             showSuffixIcon: false,
-                            toppadding: 18,
+                            toppadding: 22,
                             hintText: LocaleKeys.email.toString().tr(),
                             textInputType: TextInputType.emailAddress,
                             validator: (String? value) {
@@ -136,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             textFieldHeight: 50,
                             maxlines: 1,
                             showSuffixIcon: false,
-                            toppadding: 18,
+                            toppadding: 22,
                             hintText: LocaleKeys.name.toString().tr(),
                             textInputType: TextInputType.name,
                             validator: (String? value) {
@@ -150,7 +150,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           textFieldHeight: 50,
                           maxlines: 1,
                           showSuffixIcon: true,
-                          toppadding: 18,
+                          toppadding: 24,
                           hintText: LocaleKeys.password.toString().tr(),
                           textInputType: TextInputType.visiblePassword,
                           onsuffixIconTap: () {
@@ -178,7 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           textFieldHeight: 50,
                           maxlines: 1,
                           showSuffixIcon: true,
-                          toppadding: 18,
+                          toppadding: 24,
                           onsuffixIconTap: () {
                             authProvider.visibleConfirmPasswordChange();
                           },

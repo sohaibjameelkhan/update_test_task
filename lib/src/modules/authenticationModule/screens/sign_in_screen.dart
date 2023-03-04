@@ -7,9 +7,9 @@ import 'package:test_project/src/modules/authenticationmodule/screens/signup_scr
 import 'package:test_project/src/modules/authenticationmodule/viewmodel/authentication_viewmodel.dart';
 import 'package:test_project/translations/locale_keys.g.dart';
 
+import '../../../../configs/helpers/theme_helper.dart';
 import '../../../../configs/utils/app_colors.dart';
 import '../../../../configs/utils/frontend_text_utils.dart';
-import '../../../../configs/utils/theme.dart';
 import '../../../commonwidget/button_widget.dart';
 import '../../../commonwidget/custom_loader_widget.dart';
 import '../../../commonwidget/textfield_widget.dart';
@@ -125,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             textFieldHeight: 55,
                             maxlines: 1,
                             showSuffixIcon: false,
-                            toppadding: 12,
+                            toppadding: 17,
                             hintText: LocaleKeys.email.tr(),
                             textInputType: TextInputType.emailAddress,
                             validator: (String? value) {
@@ -139,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           textFieldHeight: 55,
                           maxlines: 1,
                           showSuffixIcon: true,
-                          toppadding: 24,
+                          toppadding: 26,
                           hintText: LocaleKeys.password.tr(),
                           textInputType: TextInputType.emailAddress,
                           onsuffixIconTap: () {
